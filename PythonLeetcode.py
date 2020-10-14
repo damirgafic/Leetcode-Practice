@@ -7,3 +7,15 @@ def shuffle(nums, n):
   return final_list
   
   Runtime: 56ms
+
+    
+  Defanging an IP Address 
+  def defangIPaddr(self, address: str) -> str:
+        defang = ''
+        for i in range(len(address)): 
+            if address[i] == '.':
+                defang += ('[.]')
+            else:
+                defang += (address[i])
+        return defang
+  Runtime: 32s
