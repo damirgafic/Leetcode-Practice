@@ -1,15 +1,9 @@
 
 import java.io.*; 
-  
-// Java program to implement 
-// a Singly Linked List 
 public class LinkedList { 
   
     Node head; // head of list 
-  
-    // Linked list Node. 
-    // This inner class is made static 
-    // so that main() can access it 
+ 
     static class Node { 
   
         int data; 
@@ -108,6 +102,9 @@ public class LinkedList {
     		currNode = currNode.next; 
     		count += 1; 
     	}
+    	if(count<k) {
+    		return -1000000000; // k number cannot be bigger than length of list 
+    	}
     	k -= 1; 
     	currNode = list.head; 
     	for(int i = 1; i<count-k; i++) {
@@ -116,6 +113,29 @@ public class LinkedList {
     	return currNode.data; 
     	//System.out.println(count);
     	//return list; 
+    }
+    // delete middle element in list 
+    public static LinkedList deleteMiddle(LinkedList list) {
+    	Node currNode = list.head, prev = null; 
+    	int count = 0; 
+    	// case 1 if list is empty
+    	if(currNode==null) {
+    		System.out.println("List is empty");
+    		return list; 
+    	}
+    	while(currNode!=null) {
+    		currNode = currNode.next; 
+    		count++; 
+    	}
+    	count = count/2; 
+    	currNode = list.head;
+    	for(int i = 1; i<count; i++) {
+    		prev = currNode; 
+    		currNode = currNode.next; 
+    	}
+    	prev.next = currNode.next; 
+    		
+    	return list; 
     }
   
     // Method to print the LinkedList. 
@@ -156,6 +176,8 @@ public class LinkedList {
         list = insert(list, 7); 
         list = insert(list, 2);
         list = insert(list, 8); 
+        list = insert(list, 10); 
+        
   
         // Print the LinkedList 
         printList(list); 
@@ -166,7 +188,9 @@ public class LinkedList {
         printList(list);
         
         
-        System.out.println("the element is " + kthToLast(2,list)); 
+        System.out.println("the element is " + kthToLast(5,list)); 
+        list = deleteMiddle(list);
+        printList(list);
       
     } 
 } 
